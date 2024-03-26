@@ -13,3 +13,26 @@ These choices allow for a scalable namespace with low cost (store up to 1M names
 ## [Frontend](web/README.md)
 
 A bare bones Next.js app that allows users to easily register subnames (i.e. POST to the Cloudflare worker's API) by signing a message with their wallet.
+
+## URLs
+
+### [Resolver](https://sepolia.etherscan.io/address/0x73b52440c81a307f55a076d99ad1c563161b27b1)
+
+### [Gateway](https://ens-gateway.tnk-biz-dev.workers.dev/)
+
+### [Domain](https://app.ens.domains/offchain-resolver.eth)
+
+### [CCIP TOOlS](https://ccip.tools/)
+
+### [Docs](https://docs.ens.domains/resolvers/ccip-read)
+
+### [YouTube](https://youtu.be/Y2XioueU2uQ?si=M9kYKzxF_KNL-7CR&t=929)
+
+Huge thanks to [Greg](https://github.com/gskril)
+
+## Flow
+1. deploy worker (follow tutorial)
+2. deploy resolver contract 
+3. get ens name
+4. set resolver contract for ens name
+5. register name on frontend
