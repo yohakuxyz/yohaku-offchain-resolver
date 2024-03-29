@@ -17,3 +17,21 @@ export async function get(name: string, env: Env): Promise<Name | null> {
 
   return parseNameFromDb(record)
 }
+
+export async function getNameByAddr(
+  address: string,
+  env: Env
+): Promise<Name | null> {
+  const db = createKysely(env)
+  const record = await db
+    .selectFrom('names')
+    .selectAll()
+    .where('owner', '=', address)
+    .executeTakeFirst()
+
+  if (!record) {
+    return null
+  }
+
+  return parseNameFromDb(record)
+}
