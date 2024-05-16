@@ -7,6 +7,7 @@ export const ZodName = z.object({
   addresses: z.record(z.string()).optional(),
   texts: z.record(z.string()).optional(),
   contenthash: z.string().optional(),
+  status: z.enum(['PENDING', 'APPROVED', 'REJECTED']),
 })
 
 export const ZodNameWithSignature = ZodName.extend({
@@ -25,6 +26,7 @@ export interface NameInKysely {
   addresses: string | null // D1 doesn't support JSON yet, we'll have to parse it manually
   texts: string | null // D1 doesn't support JSON yet, we'll have to parse it manually
   contenthash: string | null
+  status: 'PENDING' | 'APPROVED' | 'REJECTED'
   createdAt: ColumnType<Date, never, never>
   updatedAt: ColumnType<Date, never, string | undefined>
 }
