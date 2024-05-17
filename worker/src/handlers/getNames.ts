@@ -12,9 +12,12 @@ export async function getNames(env: Env) {
     return {
       ...acc,
       [name.name]: {
+        id: name.id,
         addresses: name.addresses,
         texts: name.texts,
         contenthash: name.contenthash,
+        owner: name.owner,
+        status: name.status,
       },
     }
   }, {})
