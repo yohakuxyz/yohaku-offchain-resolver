@@ -31,19 +31,22 @@ export default function App() {
       hash: data!,
       message: variables?.message!,
     },
+    status: 'pending',
   }
 
   const {
     data: gatewayData,
     error: gatewayError,
     isLoading: gatewayIsLoading,
-  } = useFetch(data && 'https://ens-gateway.tnk-biz-dev.workers.dev/set', {
+  } = useFetch(data && 'http://127.0.0.1:8787/set', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(requestBody),
   })
+
+  console.log('error', gatewayError)
 
   return (
     <>
@@ -110,7 +113,9 @@ export default function App() {
           <Helper>
             <p>
               Visit the{' '}
-              <Link href={`https://ens.app/${debouncedName}.offchain-resolver.eth`}>
+              <Link
+                href={`https://ens.app/${debouncedName}.offchain-resolver.eth`}
+              >
                 ENS Manager
               </Link>{' '}
               to see your name
