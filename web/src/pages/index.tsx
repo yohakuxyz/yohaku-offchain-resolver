@@ -23,7 +23,7 @@ export default function App() {
   const { data, isLoading, signMessage, variables } = useSignMessage()
 
   const requestBody: WorkerRequest = {
-    name: `${debouncedName}.offchain-resolver.eth`,
+    name: `${debouncedName}.yohaku.eth`,
     owner: address!,
     addresses: { '60': address },
     texts: { description },
@@ -72,14 +72,14 @@ export default function App() {
           onSubmit={(e) => {
             e.preventDefault()
             signMessage({
-              message: `Register ${debouncedName}.offchain-resolver.eth`,
+              message: `Register ${debouncedName}.yohaku.eth`,
             })
           }}
         >
           <Input
             type="text"
             label="Name"
-            suffix=".offchain-resolver.eth"
+            suffix=".yohaku.eth"
             placeholder="ens"
             required
             disabled={!!data || !address}
@@ -113,9 +113,7 @@ export default function App() {
           <Helper>
             <p>
               Visit the{' '}
-              <Link
-                href={`https://ens.app/${debouncedName}.offchain-resolver.eth`}
-              >
+              <Link href={`https://ens.app/${debouncedName}.yohaku.eth`}>
                 ENS Manager
               </Link>{' '}
               to see your name
