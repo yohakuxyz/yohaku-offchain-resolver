@@ -21,6 +21,7 @@ export type Name = z.infer<typeof ZodName>
 export type NameWithSignature = z.infer<typeof ZodNameWithSignature>
 
 export interface NameInKysely {
+  id: number
   name: string
   owner: string
   addresses: string | null // D1 doesn't support JSON yet, we'll have to parse it manually
