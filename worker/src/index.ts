@@ -8,10 +8,12 @@ import {
   getNames,
   setName,
 } from './handlers'
+import { approveName, rejectName } from './handlers/updateStatus'
 
 const { preflight, corsify } = createCors()
 const router = Router()
 
+// TODO: add roles to accept/reject application
 router
   .all('*', preflight)
   .get('/lookup/*', (request, env) => getCcipRead(request, env))
@@ -19,6 +21,8 @@ router
   .get('/get/name/:address', (request, env) => getNameByAddress(request, env))
   .get('/names', (request, env) => getNames(env))
   .post('/set', (request, env) => setName(request, env))
+  .post('/approve/:name', (request, env) => approveName(request, env))
+  .post('/reject/:address', (request, env) => rejectName(request, env))
   .all('*', () => new Response('Not found', { status: 404 }))
 
 // Handle requests to the Worker
