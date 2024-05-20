@@ -1,11 +1,13 @@
 DROP TABLE IF EXISTS names;
 
 CREATE TABLE IF NOT EXISTS names (
-	name TEXT NOT NULL PRIMARY KEY,
-	owner TEXT NOT NULL,
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name TEXT UNIQUE,
+	owner TEXT NOT NULL UNIQUE,
 	texts TEXT,
 	addresses TEXT,
 	contenthash TEXT,
+	status TEXT CHECK(status IN ('approved', 'pending', 'rejected')) DEFAULT 'pending',
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
