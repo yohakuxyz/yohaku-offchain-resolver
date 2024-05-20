@@ -2,7 +2,7 @@ import { ColumnType, Generated } from 'kysely'
 import z from 'zod'
 
 export const ZodName = z.object({
-  id: z.number().int().optional(),
+  id: z.number().optional(),
   name: z.string().regex(/^[a-z0-9-.]+$/),
   owner: z.string(),
   addresses: z.record(z.string()).optional(),
@@ -22,6 +22,7 @@ export type Name = z.infer<typeof ZodName>
 export type NameWithSignature = z.infer<typeof ZodNameWithSignature>
 
 export interface NameInKysely {
+  id: Generated<number>
   name: string
   owner: string
   addresses: string | null // D1 doesn't support JSON yet, we'll have to parse it manually
