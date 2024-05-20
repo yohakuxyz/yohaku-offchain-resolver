@@ -2,13 +2,14 @@ import { Router, createCors } from 'itty-router'
 
 import { Env } from './env'
 import {
+  approveName,
   getCcipRead,
   getName,
   getNameByAddress,
   getNames,
+  rejectName,
   setName,
 } from './handlers'
-import { approveName, rejectName } from './handlers/updateStatus'
 
 const { preflight, corsify } = createCors()
 const router = Router()
