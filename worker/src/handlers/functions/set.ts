@@ -1,7 +1,7 @@
 import { createKysely } from '../../db/kysely'
 import { Env } from '../../env'
 import { Name } from '../../models'
-import { stringifyNameForDb } from './utils'
+import { DeleteNameFromDb, stringifyNameForDb } from './utils'
 
 export async function set(nameData: Name, env: Env) {
   const db = createKysely(env)
@@ -14,25 +14,23 @@ export async function set(nameData: Name, env: Env) {
     .execute()
 }
 
-export async function approve(name: string, env: Env): Promise<boolean> {
+export async function approve(nameData: Name, env: Env) {
   const db = createKysely(env)
+  const body = stringifyNameForDb(nameData)
 
   await db
-    .updateTable('names')
-    .set({ status: 'approved' })
-    .where('name', '=', name)
+    .insertInto('names')
+    .values(body)
+    .onConflict((oc) => oc.column('name').doUpdateSet(body))
     .execute()
-
-  return true
 }
-export async function reject(owner: string, env: Env): Promise<boolean> {
+export async function reject(nameData: Name, env: Env) {
   const db = createKysely(env)
+  const body = DeleteNameFromDb(nameData)
 
   await db
-    .updateTable('names')
-    .set({ status: 'rejected', name: '' })
-    .where('owner', '=', owner)
+    .insertInto('names')
+    .values(body)
+    .onConflict((oc) => oc.column('owner').doUpdateSet(body))
     .execute()
-
-  return true
 }

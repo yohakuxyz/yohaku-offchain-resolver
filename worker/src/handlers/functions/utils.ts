@@ -63,3 +63,28 @@ export function stringifyNameForDb(
     }
   }
 }
+
+export function DeleteNameFromDb(name: Name): InsertableKysely
+export function DeleteNameFromDb(name: Name[]): InsertableKysely[]
+export function DeleteNameFromDb(
+  name: Name | Name[]
+): InsertableKysely | InsertableKysely[] {
+  if (Array.isArray(name)) {
+    return name.map(DeleteName)
+  }
+
+  return DeleteName(name)
+
+  function DeleteName(name: Name) {
+    return {
+      id: name.id,
+      name: '',
+      owner: name.owner,
+      addresses: name.addresses ? JSON.stringify(name.addresses) : null,
+      texts: name.texts ? JSON.stringify(name.texts) : null,
+      contenthash: name.contenthash || null,
+      status: name.status,
+      updatedAt: new Date().toISOString(),
+    }
+  }
+}
