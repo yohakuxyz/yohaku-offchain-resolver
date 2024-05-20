@@ -46,8 +46,6 @@ export default function App() {
     body: JSON.stringify(requestBody),
   })
 
-  console.log('error', gatewayError)
-
   return (
     <>
       <Head>

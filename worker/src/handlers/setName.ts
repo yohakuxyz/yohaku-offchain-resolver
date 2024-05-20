@@ -56,6 +56,7 @@ export async function setName(request: IRequest, env: Env): Promise<Response> {
   }
 }
 
+// TODO: add admin addresses
 const admin = '0x06aa005386F53Ba7b980c61e0D067CaBc7602a62'
 
 export async function approveName(request: IRequest, env: Env) {
@@ -98,7 +99,10 @@ export async function approveName(request: IRequest, env: Env) {
 
   // If the name is owned by someone else, return an error
   if (!existingName || existingName.owner !== owner) {
-    const response = { success: false, error: 'Name already taken' }
+    const response = {
+      success: false,
+      error: 'owner is wrong owner or not existing',
+    }
     return Response.json(response, { status: 409 })
   }
 
@@ -142,7 +146,10 @@ export async function rejectName(request: IRequest, env: Env) {
 
   // If the name is owned by someone else, return an error
   if (!existingName || existingName.owner !== owner) {
-    const response = { success: false, error: 'Name already taken' }
+    const response = {
+      success: false,
+      error: 'owner is wrong owner or not existing',
+    }
     return Response.json(response, { status: 409 })
   }
 
