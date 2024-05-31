@@ -1,6 +1,11 @@
 import { ColumnType, Generated } from 'kysely'
 import z from 'zod'
 
+export const ZodAdmin = z.object({
+  id: z.number().optional(),
+  address: z.string(),
+})
+
 export const ZodName = z.object({
   id: z.number().optional(),
   name: z.string().regex(/^[a-z0-9-.]+$/),
@@ -8,7 +13,7 @@ export const ZodName = z.object({
   addresses: z.record(z.string()).optional(),
   texts: z.record(z.string()).optional(),
   contenthash: z.string().optional(),
-  status: z.string(),
+  rejected: z.string().optional(),
 })
 
 export const ZodNameWithSignature = ZodName.extend({
@@ -28,7 +33,16 @@ export interface NameInKysely {
   addresses: string | null // D1 doesn't support JSON yet, we'll have to parse it manually
   texts: string | null // D1 doesn't support JSON yet, we'll have to parse it manually
   contenthash: string | null
-  status: string
+  rejected: string | undefined
+  createdAt: ColumnType<Date, never, never>
+  updatedAt: ColumnType<Date, never, string | undefined>
+}
+
+export type Admin = z.infer<typeof ZodAdmin>
+
+export interface AdminInKysely {
+  id: Generated<number>
+  address: string
   createdAt: ColumnType<Date, never, never>
   updatedAt: ColumnType<Date, never, string | undefined>
 }

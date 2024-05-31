@@ -2,7 +2,6 @@ import { Router, createCors } from 'itty-router'
 
 import { Env } from './env'
 import {
-  approveName,
   getCcipRead,
   getName,
   getNameByAddress,
@@ -21,7 +20,6 @@ router
   .get('/get/name/:address', (request, env) => getNameByAddress(request, env))
   .get('/names', (request, env) => getNames(env))
   .post('/set', (request, env) => setName(request, env))
-  .post('/approve', (request, env) => approveName(request, env))
   .post('/reject', (request, env) => rejectName(request, env))
   .all('*', () => new Response('Not found', { status: 404 }))
 
