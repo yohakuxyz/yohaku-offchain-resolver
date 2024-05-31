@@ -28,7 +28,7 @@ export function parseNameFromDb(
       addresses: name.addresses ? JSON.parse(name.addresses) : undefined,
       texts: name.texts ? JSON.parse(name.texts) : undefined,
       contenthash: name.contenthash || undefined,
-      status: name.status,
+      rejected: name.rejected,
       createdAt: name.createdAt,
       updatedAt: name.updatedAt,
     }
@@ -58,7 +58,7 @@ export function stringifyNameForDb(
       addresses: name.addresses ? JSON.stringify(name.addresses) : null,
       texts: name.texts ? JSON.stringify(name.texts) : null,
       contenthash: name.contenthash || null,
-      status: name.status,
+      rejected: name.rejected,
       updatedAt: new Date().toISOString(),
     }
   }
@@ -83,7 +83,7 @@ export function DeleteNameFromDb(
       addresses: name.addresses ? JSON.stringify(name.addresses) : null,
       texts: name.texts ? JSON.stringify(name.texts) : null,
       contenthash: name.contenthash || null,
-      status: name.status,
+      rejected: name.rejected,
       updatedAt: new Date().toISOString(),
     }
   }

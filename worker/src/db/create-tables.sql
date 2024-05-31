@@ -7,7 +7,16 @@ CREATE TABLE IF NOT EXISTS names (
 	texts TEXT,
 	addresses TEXT,
 	contenthash TEXT,
-	status TEXT CHECK(status IN ('approved', 'pending', 'rejected')) DEFAULT 'pending',
+	rejected TEXT CHECK(rejected IN ('true', 'false')) DEFAULT 'false',
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS admins;
+
+CREATE TABLE IF NOT EXISTS admins (
+	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	address TEXT UNIQUE NOT NULL,
 	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

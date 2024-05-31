@@ -4,10 +4,11 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "dev:create-tables": "wrangler d1 execute offchain-resolver --local --file=./src/db/create-tables.sql",
-    "prod:create-tables": "wrangler d1 execute offchain-resolver --file=./src/db/create-tables.sql"
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy",
+    "dev:create-tables": "npx wrangler d1 execute offchain-resolver --local --file=./src/db/create-tables.sql",
+    "prod:create-tables": "npx wrangler d1 execute offchain-resolver --file=./src/db/create-tables.sql",
+    "clean": "rm -rf node_modules .wrangler"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230807.0",

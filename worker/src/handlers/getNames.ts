@@ -17,7 +17,7 @@ export async function getNames(env: Env) {
         texts: name.texts,
         contenthash: name.contenthash,
         owner: name.owner,
-        status: name.status,
+        rejected: name.rejected,
       },
     }
   }, {})
