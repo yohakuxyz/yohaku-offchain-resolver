@@ -8,5 +8,5 @@ export interface WorkerRequest {
     message: string
     hash: string
   }
-  status?: string
+  rejected: string | undefined
 }

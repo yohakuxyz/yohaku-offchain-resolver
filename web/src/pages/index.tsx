@@ -31,7 +31,7 @@ export default function App() {
       hash: data!,
       message: variables?.message!,
     },
-    status: 'pending',
+    rejected: 'false',
   }
 
   const {
