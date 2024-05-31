@@ -83,7 +83,7 @@ export function DeleteNameFromDb(
       addresses: name.addresses ? JSON.stringify(name.addresses) : null,
       texts: name.texts ? JSON.stringify(name.texts) : null,
       contenthash: name.contenthash || null,
-      rejected: name.rejected,
+      rejected: 'true',
       updatedAt: new Date().toISOString(),
     }
   }
