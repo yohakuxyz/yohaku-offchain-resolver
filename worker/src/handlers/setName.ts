@@ -1,6 +1,6 @@
-import { verifyMessage } from 'ethers/lib/utils'
+import { verifyMessage as ethersVerifyMessage } from 'ethers/lib/utils'
 import { IRequest } from 'itty-router'
-
+import { verifyMessage } from 'viem'
 import { Env } from '../env'
 import { ZodNameWithSignature } from '../models'
 import { get } from './functions/get'
@@ -26,8 +26,14 @@ export async function setName(request: IRequest, env: Env): Promise<Response> {
 
   // Validate signature
   try {
-    const signer = verifyMessage(signature.message, signature.hash)
-    if (signer.toLowerCase() !== owner.toLowerCase()) {
+    // const signer = verifyMessage(signature.message, signature.hash)
+    const result = verifyMessage({
+      address: owner as `0x${string}`,
+      message: signature.message,
+      signature: signature.hash as `0x${string}`,
+    })
+
+    if (!result) {
       throw new Error('Invalid signer')
     }
   } catch (err) {
@@ -70,7 +76,7 @@ export async function rejectName(request: IRequest, env: Env) {
 
   // Validate signature
   try {
-    const signer = verifyMessage(signature.message, signature.hash)
+    const signer = ethersVerifyMessage(signature.message, signature.hash)
     if (!validateAdmin(signer.toLowerCase(), env)) {
       throw new Error('Invalid signer')
     }
