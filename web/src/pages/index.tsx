@@ -20,7 +20,7 @@ export default function App() {
   const debouncedName = useDebounce(name, 500)
   const enabled = !!debouncedName && regex.test(debouncedName)
 
-  const { data, isLoading, signMessage, variables } = useSignMessage()
+  const { data, signMessage, variables } = useSignMessage()
 
   const requestBody: WorkerRequest = {
     name: `${debouncedName}.yohaku.eth`,
@@ -29,7 +29,7 @@ export default function App() {
     texts: { description },
     signature: {
       hash: data!,
-      message: variables?.message!,
+      message: variables?.message as string,
     },
     rejected: 'false',
   }
@@ -95,7 +95,7 @@ export default function App() {
           <Button
             type="submit"
             disabled={!enabled || !!data}
-            loading={isLoading || gatewayIsLoading}
+            loading={gatewayIsLoading}
           >
             Register
           </Button>
