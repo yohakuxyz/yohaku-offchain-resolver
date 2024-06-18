@@ -78,7 +78,7 @@ export function DeleteNameFromDb(
   function DeleteName(name: Name) {
     return {
       id: name.id,
-      name: '',
+      name: name.name,
       owner: name.owner,
       addresses: name.addresses ? JSON.stringify(name.addresses) : null,
       texts: name.texts ? JSON.stringify(name.texts) : null,
