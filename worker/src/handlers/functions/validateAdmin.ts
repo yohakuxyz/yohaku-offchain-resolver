@@ -12,11 +12,7 @@ export async function validateAdmin(
     .where('address', '=', address)
     .executeTakeFirst()
 
-  if (record) {
-    return true
-  } else {
-    return false
-  }
+  return record ? true : false
 }
 
 export async function getAdmin(env: Env) {
