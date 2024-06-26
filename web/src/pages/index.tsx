@@ -22,7 +22,7 @@ export default function App() {
 
   const { data, signMessage, variables } = useSignMessage()
 
-  const requestBody: WorkerRequest = {
+  const requestBody = {
     name: `${debouncedName}.yohaku.eth`,
     owner: address!,
     addresses: { '60': address },

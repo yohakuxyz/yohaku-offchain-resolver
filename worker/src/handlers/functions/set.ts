@@ -7,6 +7,7 @@ export async function set(nameData: Name, env: Env) {
   const db = createKysely(env)
   const body = stringifyNameForDb(nameData)
 
+  // oc.column('name') because 'id'(autoincrement) is undefined at this time
   await db
     .insertInto('names')
     .values(body)
@@ -14,16 +15,6 @@ export async function set(nameData: Name, env: Env) {
     .execute()
 }
 
-export async function approve(nameData: Name, env: Env) {
-  const db = createKysely(env)
-  const body = stringifyNameForDb(nameData)
-
-  await db
-    .insertInto('names')
-    .values(body)
-    .onConflict((oc) => oc.column('name').doUpdateSet(body))
-    .execute()
-}
 export async function reject(nameData: Name, env: Env) {
   const db = createKysely(env)
   const body = DeleteNameFromDb(nameData)
@@ -31,6 +22,6 @@ export async function reject(nameData: Name, env: Env) {
   await db
     .insertInto('names')
     .values(body)
-    .onConflict((oc) => oc.column('owner').doUpdateSet(body))
+    .onConflict((oc) => oc.column('id').doUpdateSet(body))
     .execute()
 }

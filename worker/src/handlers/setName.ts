@@ -76,8 +76,17 @@ export async function rejectName(request: IRequest, env: Env) {
 
   // Validate signature
   try {
+    // TODO: ethers -> viem
+    // issue: if verify signature(created with coinbase wallet) with ethers, it will throw error
+    // because the length of signature is not valid(132)
+    // viem just return boolean, need to check if the signer is admin
     const signer = ethersVerifyMessage(signature.message, signature.hash)
-    if (!validateAdmin(signer.toLowerCase(), env)) {
+    const validateAdminResult = await validateAdmin(
+      signer /*.toLowerCase() */,
+      env
+    )
+
+    if (!validateAdminResult) {
       throw new Error('Invalid signer')
     }
   } catch (err) {
