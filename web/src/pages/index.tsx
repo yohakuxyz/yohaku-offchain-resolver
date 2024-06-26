@@ -23,7 +23,6 @@ export default function App() {
   const { data, signMessage, variables } = useSignMessage()
 
   const requestBody = {
-    id: 2,
     name: `${debouncedName}.yohaku.eth`,
     owner: address!,
     addresses: { '60': address },
@@ -32,14 +31,14 @@ export default function App() {
       hash: data!,
       message: variables?.message as string,
     },
-    rejected: 'true',
+    rejected: 'false',
   }
 
   const {
     data: gatewayData,
     error: gatewayError,
     isLoading: gatewayIsLoading,
-  } = useFetch(data && 'http://127.0.0.1:8787/reject', {
+  } = useFetch(data && 'http://127.0.0.1:8787/set', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
