@@ -12,9 +12,16 @@ export async function validateAdmin(
     .where('address', '=', address)
     .executeTakeFirst()
 
-  if (!record) {
+  if (record) {
+    return true
+  } else {
     return false
   }
+}
 
-  return true
+export async function getAdmin(env: Env) {
+  const db = createKysely(env)
+  const record = await db.selectFrom('admins').selectAll().execute()
+
+  return record
 }
